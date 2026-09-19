@@ -6,8 +6,8 @@ COPY --chown=gradle:gradle . .
 
 RUN gradle build -x test --no-daemon
 
-# ---------- STAGE 2: ejecución con OpenJDK ----------
-FROM openjdk:21-jdk-slim AS run
+# ---------- STAGE 2: ejecución con OpenJDK (Eclipse Temurin) ----------
+FROM eclipse-temurin:21-jre-jammy AS run
 WORKDIR /app
 
 # discografia-1.jar = rootProject.name (settings.gradle) + version (build.gradle)

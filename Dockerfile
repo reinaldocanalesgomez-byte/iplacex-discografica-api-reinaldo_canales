@@ -1,10 +1,10 @@
-# ---------- STAGE 1: build del .jar con Gradle ----------
-FROM gradle:8.10.2-jdk21 AS build
+# ---------- STAGE 1: build del .jar con el Gradle Wrapper ----------
+FROM eclipse-temurin:21-jdk-jammy AS build
 WORKDIR /home/gradle/project
 
-COPY --chown=gradle:gradle . .
+COPY . .
 
-RUN gradle build -x test --no-daemon
+RUN chmod +x gradlew && ./gradlew build -x test --no-daemon
 
 # ---------- STAGE 2: ejecución con OpenJDK (Eclipse Temurin) ----------
 FROM eclipse-temurin:21-jre-jammy AS run
